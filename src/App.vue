@@ -18,6 +18,14 @@ import Header from './components/Header.vue'
 .container{
   max-width: 1440px;
   margin: 0 auto;
-  padding: 30px 294px 92px;
+  padding: 30px 500px 92px;
+}
+
+@media screen and (max-width: 1800px) {
+  .container{
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 30px 400px 92px;
+}
 }
 </style>

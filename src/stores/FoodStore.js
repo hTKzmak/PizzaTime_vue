@@ -70,17 +70,15 @@ export const useCounterStore = defineStore('foodStore', {
         },
 
         difficultFilter(difficult) {
-            switch(difficult) {
-                case 'all':
-                    this.favorite = this.data;
-                    break;
+            switch (difficult) {
                 case 'easy':
-                    this.favorite = this.data.filter(elem => elem.difficulty == 'Easy');
+                    this.favorite = this.favorite.filter(elem => elem.difficulty === 'Easy');
                     break;
                 case 'medium':
-                    this.favorite = this.data.filter(elem => elem.difficulty == 'Medium');
+                    this.favorite = this.favorite.filter(elem => elem.difficulty === 'Medium');
                     break;
-                default:
+                case 'all':
+                    this.favorite
                     break;
             }
         }

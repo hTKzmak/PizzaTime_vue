@@ -19,6 +19,7 @@ let data = foodStore.data;
 
   <div class="food-list">
     <div v-for="info in data">
+
       <div class="food-item">
         <img :src=info.image alt="#">
         <div class="food-item-info">
@@ -28,6 +29,7 @@ let data = foodStore.data;
           <button @click="foodStore.addToFavourite(info.id)">Add to favorite</button>
         </div>
       </div>
+      
     </div>
   </div>
 </template>

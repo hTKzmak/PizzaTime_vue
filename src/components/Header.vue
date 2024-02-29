@@ -4,7 +4,9 @@ import { RouterLink } from 'vue-router'
 
 <template>
     <header>
-        <a href="#!" class="logo">Recipes</a>
+        <div class="logo">
+            <RouterLink to="/">Recipes</RouterLink>
+        </div>
         <nav>
             <RouterLink to="/">All recipes</RouterLink>
             <RouterLink to="/favorite">Favorite</RouterLink>
@@ -29,11 +31,13 @@ nav>a {
     color: #000;
 }
 
-.logo {
+.logo,
+.logo>a {
     padding: 25px 63px;
     border-radius: 15px;
     font-size: 48px;
-
+    color: #000;
+    text-decoration: none;
 }
 
 nav {
