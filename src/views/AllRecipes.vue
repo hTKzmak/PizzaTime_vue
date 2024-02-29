@@ -13,7 +13,7 @@ let data = foodStore.data;
 
     <div class="search">
       <p>Search recpies</p>
-      <input type="text" id="input-search">
+      <input type="text" id="input-search" @keydown.enter="foodStore.searchFunc($event.target.value)">
     </div>
   </div>
 
@@ -25,7 +25,7 @@ let data = foodStore.data;
           <h3>{{ info.name }}</h3>
           <p>Difficult: {{ info.difficulty }}</p>
           <p>Cuisine: {{ info.cuisine }}</p>
-          <button>Add to favorite</button>
+          <button @click="foodStore.addToFavourite(info.id)">Add to favorite</button>
         </div>
       </div>
     </div>
@@ -51,8 +51,6 @@ let data = foodStore.data;
   border: 2px solid #000;
   border-radius: 10px;
 }
-
-
 
 
 .food-list {
@@ -101,7 +99,7 @@ let data = foodStore.data;
 }
 
 img {
-  width: 255.8px;
+  width: 228.8px;
   height: 207.89px;
 }
 </style>
