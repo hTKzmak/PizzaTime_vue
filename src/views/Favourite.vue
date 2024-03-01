@@ -1,31 +1,38 @@
 <script setup>
 import { useCounterStore } from '@/stores/FoodStore';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const foodStore = useCounterStore();
-let favorite = ref(foodStore.favorite);
-let difficultValue = 'all';
+// let favorite = ref(foodStore.favorite);
+let difficultValue = ref('All');
 
-// Обновляем переменную favorite при изменении данных в хранилище
-watch(() => foodStore.favorite, () => {
-    favorite.value = foodStore.favorite;
+
+const favoriteFilter = computed(() => {
+  if (difficultValue.value === "All") {
+    return foodStore.favorite;
+  } else {
+    return foodStore.favorite.filter(
+      (elem) => elem.difficulty === difficultValue.value
+    );
+  }
 });
+
 </script>
 <template>
   <div class="title">
-    <h1>Favorite ({{ favorite.length }})</h1>
+    <h1>Favorite ({{ favoriteFilter.length }})</h1>
 
     <div class="difficulty">
       <p>Difficulty</p>
-      <select name="difficult" id="difficult" v-model="difficultValue" @change="foodStore.difficultFilter(difficultValue)">
-        <option value="all">All</option>
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
+      <select name="difficult" id="difficult" v-model="difficultValue">
+        <option value="All">All</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
       </select>
     </div>
 
     <div class="favorite-list">
-      <div v-for="info in favorite">
+      <div v-for="info in favoriteFilter">
         <div class="favorite-item">
           <img :src=info.image alt="#">
           <div class="favorite-item-info">
@@ -33,7 +40,8 @@ watch(() => foodStore.favorite, () => {
             <p>Difficult: {{ info.difficulty }}</p>
             <p>Cuisine: {{ info.cuisine }}</p>
             <div class="item-buttons">
-              <button :class="[!info.watched ? 'watchBtn unwatchedBtn' : 'watchBtn watchedBtn']" @click="foodStore.watchChanger(info.id)">{{ !info.watched ? 'Unwatched' : 'Watched' }}</button>
+              <button :class="[!info.watched ? 'watchBtn unwatchedBtn' : 'watchBtn watchedBtn']"
+                @click="foodStore.watchChanger(info.id)">{{ !info.watched ? 'Unwatched' : 'Watched' }}</button>
               <button class="removeBtn" @click="foodStore.deleteItem(info.id)">Remove</button>
             </div>
           </div>
@@ -91,7 +99,7 @@ select {
 }
 
 .watchBtn,
-.removeBtn{
+.removeBtn {
   width: 135px;
   padding: 14px 35px;
   font-weight: 700;
@@ -100,19 +108,19 @@ select {
   cursor: pointer;
 }
 
-.watchedBtn{
+.watchedBtn {
   background-color: #6FFF8F;
 }
 
-.unwatchedBtn{
+.unwatchedBtn {
   background-color: #85D3FF;
 }
 
-.removeBtn{
+.removeBtn {
   background-color: #FF0404;
 }
 
-.item-buttons{
+.item-buttons {
   display: grid;
   justify-content: start;
   gap: 10px;

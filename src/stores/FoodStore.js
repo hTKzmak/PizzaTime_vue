@@ -67,20 +67,6 @@ export const useCounterStore = defineStore('foodStore', {
                 }
                 foodList.push(res);
             });
-        },
-
-        difficultFilter(difficult) {
-            switch (difficult) {
-                case 'easy':
-                    this.favorite = this.favorite.filter(elem => elem.difficulty === 'Easy');
-                    break;
-                case 'medium':
-                    this.favorite = this.favorite.filter(elem => elem.difficulty === 'Medium');
-                    break;
-                case 'all':
-                    this.favorite
-                    break;
-            }
         }
     }
 })
